@@ -4,4 +4,8 @@ class Ingredient < ActiveRecord::Base
   def cocktails
     CocktailIngredient.all.select { |ci| ci.ingredient == self }.map { |ci| ci.cocktail }
   end
+
+  def cocktail_names
+     cocktails.count
+  end 
 end
