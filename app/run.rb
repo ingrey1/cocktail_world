@@ -2,11 +2,10 @@ require "pry"
 
 require_relative "../config/environment.rb"
 
-ingredient1 = Ingredient.create(name: "sugar")
+#ingredient1 = Ingredient.create(name: "sugar")
 
-=======
-cocktail1 = Cocktail.create(name: "the first cocktail", instructions: "A magic cocktail")
-cocktail_info = {
+#cocktail1 = Cocktail.create(name: "the first cocktail", instructions: "A magic cocktail")
+cocktail_info = [{
     "idDrink" => "17222",
     "strDrink" => "A1",
     "strDrinkAlternate" => nil,
@@ -58,11 +57,7 @@ cocktail_info = {
     "strMeasure15" => nil,
     "strCreativeCommonsConfirmed" => "No",
     "dateModified" => "2017-09-07 21:42:09"
-    }
+    }]
 
 populator = PopulateDB.new(cocktail_info)
-#my_cocktail = populator.build_cocktail(populator.cocktail_data)
-#puts Cocktail.all
-populator.build_ingredients
-puts Ingredient.all
->>>>>>> cf3ab9606de0214ad7ce0d418cfbeea01223ad4d
+populator.populate_db
