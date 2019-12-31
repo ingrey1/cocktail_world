@@ -3,7 +3,7 @@ require "pry"
 require_relative "../config/environment.rb"
 
 ingredient1 = Ingredient.create(name: "sugar")
-cocktail1 = Cocktail.create(name: "the first cocktail", description: "A magic cocktail")
+cocktail1 = Cocktail.create(name: "the first cocktail", instructions: "A magic cocktail")
 cocktail_info = {
     "idDrink" => "17222",
     "strDrink" => "A1",
@@ -62,3 +62,4 @@ populator = PopulateDB.new(cocktail_info)
 #my_cocktail = populator.build_cocktail(populator.cocktail_data)
 #puts Cocktail.all
 populator.build_ingredients
+puts Ingredient.all

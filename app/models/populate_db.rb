@@ -59,38 +59,40 @@ class PopulateDB
 
   def initialize(cocktail_data)
     @cocktail_data = cocktail_data
-    @ingredients = []
     @cocktails = []
-    @cocktail_ingredients = []
+    @ingredients = []
     #populate_db
   end
 
-  def build_cocktail(cocktail_info = self.cocktail_data)
+  def build_cocktail(cocktail_info)
     new_cocktail = {
       "name" => cocktail_info["strDrink"],
       "instructions" => cocktail_info["strInstructions"],
     }
 
-    Cocktail.create(new_cocktail)
+    self.cocktails << Cocktail.create(new_cocktail)
   end
 
-  def build_ingredients(ingredient_info = self.cocktail_data)
+  def build_ingredients(ingredient_info)
     15.times do |num|
-      puts num
-      ingredient_name = ingredient_info["strIngredient" + num.to_s]
+     
+      ingredient_name = ingredient_info["strIngredient" + (num + 1).to_s]
       if ingredient_name
-        Ingredient.create(name: ingredient_name)
+        self.ingredients << Ingredient.create(name: ingredient_name)
       end
     end
   end
 
-  def build_cocktail_ingredient(cock_ingredient_info)
-  end
-
   def build_cocktails
+
+    self.cocktail_data.each {|cocktail_info| build_cocktail(cocktail_info)}
+    
   end
 
   def build_all_ingredients
+
+    self.cocktail_data.each {|cocktail_info| build_cocktail(cocktail_info)}
+
   end
 
   def build_cocktail_ingredients
