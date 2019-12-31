@@ -1,29 +1,15 @@
 require "pry"
-
+require "rake"
 require_relative "../config/environment.rb"
+require_relative "./load_rake.rb"
 
-<<<<<<< HEAD
-ingredient1 = Ingredient.create(name: "sugar")
-ingredient2 = Ingredient.create(name: "syrup")
-ingredient3 = Ingredient.create(name: "syrup")
+describe PopulateDB do
+  before(:each) do
+    Rake::Task["db:drop"].invoke
+    Rake::Task["db:migrate"].invoke
+  end
 
-cocktail1 = Cocktail.create(name: "the first cocktail", instructions: "A magic cocktail")
-cocktail2 = Cocktail.create(name: "the second cocktail", instructions: "Pour liquid into cup")
-cocktail3 = Cocktail.create(name: "the third cocktail", instructions: "Drink")
-
-cocktail_ingredient1 = CocktailIngredient.create(amount: '1', cocktail: cocktail1, ingredient: ingredient1)
-
-
-
-runner = RunCocktailWorld.new()
-cocktail_new = runner.retrieve_cocktail_by_name("the first cocktail")
-# binding.pry
-puts cocktail_new
-=======
-#ingredient1 = Ingredient.create(name: "sugar")
-
-#cocktail1 = Cocktail.create(name: "the first cocktail", instructions: "A magic cocktail")
-cocktail_info = [{
+  cocktail_info = [{
     "idDrink" => "17222",
     "strDrink" => "A1",
     "strDrinkAlternate" => nil,
@@ -77,6 +63,9 @@ cocktail_info = [{
     "dateModified" => "2017-09-07 21:42:09"
     }]
 
-populator = PopulateDB.new(cocktail_info)
-populator.populate_db
->>>>>>> 5a8b5be182545bc00032944309e2e63e18174fd0
+  context "initialization process" do
+    it("should initialize without error") do
+      expect { PopulateDB.new(cocktail_info) }.to_not raise_error
+    end
+  end
+end

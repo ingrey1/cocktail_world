@@ -53,15 +53,15 @@
 #   strCreativeCommonsConfirmed: "No",
 #   dateModified: "2017-09-07 21:42:09"
 #   }
+require 'pry'
 
 class PopulateDB
   attr_reader :cocktail_data, :cocktails, :ingredients, :cocktail_ingredients
 
-  def initialize(cocktail_data)
+  def initialize(cocktail_data = [])
     @cocktail_data = cocktail_data
     @cocktails = []
     @ingredients = []
-    #populate_db
   end
 
   def build_cocktail(cocktail_info)
@@ -75,7 +75,6 @@ class PopulateDB
 
   def build_ingredients(ingredient_info)
     15.times do |num|
-     
       ingredient_name = ingredient_info["strIngredient" + (num + 1).to_s]
       if ingredient_name
         self.ingredients << Ingredient.create(name: ingredient_name)
@@ -84,29 +83,29 @@ class PopulateDB
   end
 
   def build_cocktails
-
-    self.cocktail_data.each {|cocktail_info| build_cocktail(cocktail_info)}
-    
+    self.cocktail_data.each { |cocktail_info| build_cocktail(cocktail_info) }
   end
 
   def build_all_ingredients
-
-    self.cocktail_data.each {|cocktail_info| build_cocktail(cocktail_info)}
-
+    self.cocktail_data.each { |cocktail_info| build_ingredients(cocktail_info) }
   end
 
   def build_cocktail_ingredients
-  end
-
-  def populate_cocktails
-  end
-
-  def populate_ingredients
+    self.cocktail_data.each do |cocktail_info|
+      ingredient_names = cocktail_info.select { |key, value| value != nil && key.include?("strIngredient") }.values
+      ingredient_amounts = cocktail_info.select { |key, value| value != nil && key.include?("strMeasure") }.values
+      found_cocktail = cocktails.find { |c| c.name == cocktail_info["strDrink"] }
+      ingredient_names.each_with_index do |ingredient_name, index|
+        found_ingredient = ingredients.find { |i| i.name == ingredient_name }
+        #binding.pry
+        CocktailIngredient.create(cocktail: found_cocktail, ingredient: found_ingredient, amount: ingredient_amounts[index])
+      end
+    end
   end
 
   def populate_db
-    populate_cocktails()
-    populate_ingredients()
-    populate_cocktail_ingredients()
+    build_cocktails()
+    build_all_ingredients()
+    build_cocktail_ingredients()
   end
 end
