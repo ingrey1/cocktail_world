@@ -58,11 +58,10 @@ require 'pry'
 class PopulateDB
   attr_reader :cocktail_data, :cocktails, :ingredients, :cocktail_ingredients
 
-  def initialize(cocktail_data)
+  def initialize(cocktail_data = [])
     @cocktail_data = cocktail_data
     @cocktails = []
     @ingredients = []
-    #populate_db
   end
 
   def build_cocktail(cocktail_info)
