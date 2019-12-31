@@ -75,7 +75,6 @@ class PopulateDB
 
   def build_ingredients(ingredient_info)
     15.times do |num|
-     
       ingredient_name = ingredient_info["strIngredient" + (num + 1).to_s]
       if ingredient_name
         self.ingredients << Ingredient.create(name: ingredient_name)
@@ -84,29 +83,19 @@ class PopulateDB
   end
 
   def build_cocktails
-
-    self.cocktail_data.each {|cocktail_info| build_cocktail(cocktail_info)}
-    
+    self.cocktail_data.each { |cocktail_info| build_cocktail(cocktail_info) }
   end
 
   def build_all_ingredients
-
-    self.cocktail_data.each {|cocktail_info| build_cocktail(cocktail_info)}
-
+    self.cocktail_data.each { |cocktail_info| build_cocktail(cocktail_info) }
   end
 
   def build_cocktail_ingredients
   end
 
-  def populate_cocktails
-  end
-
-  def populate_ingredients
-  end
-
   def populate_db
-    populate_cocktails()
-    populate_ingredients()
-    populate_cocktail_ingredients()
+    build_cocktails()
+    build_all_ingredients()
+    build_cocktail_ingredients()
   end
 end
