@@ -1,5 +1,7 @@
 class Ingredient < ActiveRecord::Base
-  
-    has_many :ingredients, through: :cocktail_ingredients
+  has_many :ingredients, through: :cocktail_ingredients
 
-end 
+  def cocktails
+    CocktailIngredient.all.select { |ci| ci.ingredient == self }.map { |ci| ci.cocktail }
+  end
+end
