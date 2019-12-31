@@ -19,7 +19,7 @@ class RunCocktailWorld
   end
 
   def retrieve_cocktails_by_name
-    
+
   end
 
   def retrieve_cocktails_by_ingredient
@@ -33,13 +33,15 @@ class RunCocktailWorld
   end
 
   def all_ingredients
-    Ingredient.all.map do |ingredient|
-      ingredient.name
-    end
+  array = []
+  Ingredient.all.map do |ingredient|
+    array << ingredient.name 
   end
+  array.uniq
+end
 
   def select_random_cocktail
-
+    
   end
 end
 
