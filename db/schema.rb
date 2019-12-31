@@ -14,10 +14,10 @@ ActiveRecord::Schema.define(version: 3) do
 
   create_table "cocktail_ingredients", force: :cascade do |t|
     t.string "amount"
-    t.integer "cocktail_id_id"
-    t.integer "ingredient_id_id"
-    t.index ["cocktail_id_id"], name: "index_cocktail_ingredients_on_cocktail_id_id"
-    t.index ["ingredient_id_id"], name: "index_cocktail_ingredients_on_ingredient_id_id"
+    t.integer "cocktail_id"
+    t.integer "ingredient_id"
+    t.index ["cocktail_id"], name: "index_cocktail_ingredients_on_cocktail_id"
+    t.index ["ingredient_id"], name: "index_cocktail_ingredients_on_ingredient_id"
   end
 
   create_table "cocktails", force: :cascade do |t|
