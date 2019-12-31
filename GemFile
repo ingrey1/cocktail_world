@@ -7,3 +7,8 @@ gem "rake"
 gem "database_cleaner"
 gem "pry"
 gem "activerecord", "~> 5.2.3"
+
+#added for getting data:
+
+gem 'rest-client'
+gem 'json'
