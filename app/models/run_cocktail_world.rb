@@ -39,7 +39,6 @@ end
 
   def retrieve_cocktail_by_name(name)
     cocktail = Cocktail.all.find { |cocktail| cocktail.name == name }
-  
      cocktail_ingredients = CocktailIngredient.all.select do |cocktail_ingredient|
         cocktail_ingredient.cocktail == cocktail
      end
@@ -49,7 +48,6 @@ end
      end
     
      ingredient_amounts = cocktail_ingredients.map do |cocktail_ingredients|
-    
       cocktail_ingredients.amount
      end
    
@@ -58,20 +56,28 @@ end
   end
 
   def retrieve_cocktails_by_ingredient(name)
+    # search Ingredients by ingredient name
+  
+    find_ingredient = Ingredient.all.find { |ingredient| ingredient.name == name }
+      cocktail_ingredients_by_ingredient = CocktailIngredient.all.select do |cocktail_ingredient|
+        cocktail_ingredient.ingredient == find_ingredient
+      end
 
+      ingredient_cocktails = CocktailIngredient.all.select do |cocktail_ingredient|
+        cocktail_ingredient.ingredient == find_ingredient
+      end
+        cocktails_with_ingredient = ingredient_cocktails.map do |cocktails_ingredients| 
+        cocktails_ingredients.cocktail
+      end
 
+      cocktails_with_ingredient.map do |cocktails|
+        retrieve_cocktail_by_name(cocktails.name)
+      end 
   end
 
-  # def all_cocktails
-  #   Cocktail.all.map do |cocktail|
-  #     retrieve_cocktail_by_name(cocktail.name)
-  #   end
-    
-  # end
-
-  def make_cocktail(name, instructions, ingredients_arr, amounts_arr)
+  def make_cocktail(name, instruction, ingredients_arr, amounts_arr)
     # binding.pry
-    new_cocktail = { name: name, instructions: instructions, ingredients: {} }
+    new_cocktail = { name: name, instructions: instruction, ingredients: {} }
     new_cocktail_ingredients = new_cocktail[:ingredients]
       ingredients_arr.each_with_index do |key, index|  
         new_cocktail_ingredients[key] = amounts_arr[index]
