@@ -36,7 +36,7 @@ class RunCocktailWorld
         puts "Enter exit to quit"
         user_choice1 = gets.strip
         if user_choice1 == "1"
-          continue
+          next
         else
           break
         end
@@ -52,7 +52,7 @@ class RunCocktailWorld
         puts "Enter exit to quit"
         user_choice2 = gets.strip
         if user_choice2 == "1"
-          continue
+          next
         else
           break
         end
@@ -66,7 +66,7 @@ class RunCocktailWorld
         puts "Enter exit to quit"
         user_choice3 = gets.strip
         if user_choice3 == "1"
-          continue
+          next
         else
           break
         end
