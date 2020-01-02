@@ -1,9 +1,5 @@
 require "pry"
 
-
-
-
-
 class RunCocktailWorld
 
   def greeting
@@ -14,6 +10,7 @@ class RunCocktailWorld
     puts "Press 1 to search for a cocktail by name"
     puts "Press 2 to search for a cocktail by ingredient"
     puts "Press 3 for a surprise cocktail"
+    puts "Press 4 for cocktail stats"
     puts "Enter exit to quit"
   end
 
@@ -96,6 +93,12 @@ class RunCocktailWorld
           9.times {puts "#{user_choice3} is an Invalid command!"}
           next
         end
+      elsif user_input == '4'
+        puts "There are #{Cocktail.all.count} cocktails and #{Ingredient.all.count} ingredients."
+        puts "Here are the most used cocktail ingredients:\n\n"
+        Ingredient.display_popular(10)
+        sleep 2
+        
       elsif user_input == "exit"
         break
       else
@@ -134,8 +137,6 @@ class RunCocktailWorld
 
     find_ingredient = Ingredient.find_by(name: name)
     cocktail_ingredients_by_ingredient = CocktailIngredient.where(ingredient: find_ingredient)
-
-    
 
     ingredient_cocktails = CocktailIngredient.all.select do |cocktail_ingredient|
       cocktail_ingredient.ingredient == find_ingredient
