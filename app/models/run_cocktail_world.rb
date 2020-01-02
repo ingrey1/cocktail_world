@@ -1,5 +1,9 @@
 require "pry"
 
+
+
+
+
 class RunCocktailWorld
 
   def greeting
@@ -65,6 +69,7 @@ class RunCocktailWorld
         puts
         puts "Enter 1 to return to the main menu"
         puts "Enter exit to quit"
+        
         user_choice2 = gets.strip.downcase
         if user_choice2 == "1"
           next
