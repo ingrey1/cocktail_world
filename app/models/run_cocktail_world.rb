@@ -57,7 +57,7 @@ end
             else
               break
             end
-          elsif user_input = "3"
+          elsif user_input == "3"
             random_cocktail = select_random_cocktail()
             puts random_cocktail
             puts 
@@ -75,9 +75,13 @@ end
               break      
     end
   end
+end
 
   def retrieve_cocktail_by_name(name)
     cocktail = Cocktail.all.find { |cocktail| cocktail.name == name }
+    if !cocktail
+      return nil
+    end
      cocktail_ingredients = CocktailIngredient.all.select do |cocktail_ingredient|
         cocktail_ingredient.cocktail == cocktail
      end
@@ -101,17 +105,19 @@ end
       cocktail_ingredients_by_ingredient = CocktailIngredient.all.select do |cocktail_ingredient|
         cocktail_ingredient.ingredient == find_ingredient
       end
-
+        
       ingredient_cocktails = CocktailIngredient.all.select do |cocktail_ingredient|
         cocktail_ingredient.ingredient == find_ingredient
       end
+      
         cocktails_with_ingredient = ingredient_cocktails.map do |cocktails_ingredients| 
         cocktails_ingredients.cocktail
       end
-
-      cocktails_with_ingredient.map do |cocktails|
-        retrieve_cocktail_by_name(cocktails.name)
+     
+      cocktails_with_ingredient.map do |cocktail|
+        retrieve_cocktail_by_name(cocktail.name)
       end 
+      
   end
 
   def make_cocktail(name, instruction, ingredients_arr, amounts_arr)
@@ -138,11 +144,11 @@ end
     end
   end
 
-  def select_random_cocktail
-   random_cocktail = Cocktail.all.sample
-   #sample a random cocktail
-   retrieve_cocktail_by_name(random_cocktail.name)
-   # call retrieve_cocktail_by_name
+    def select_random_cocktail
+      random_cocktail = Cocktail.all.sample
+      #sample a random cocktail
+      retrieve_cocktail_by_name(random_cocktail.name)
+      # call retrieve_cocktail_by_name
+    end
   end
-end
 

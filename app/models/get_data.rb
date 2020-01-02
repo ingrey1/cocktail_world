@@ -63,6 +63,5 @@ class GetData
     new_array
   end
 
-ap simplify_the_cocktail_data_structure
-
+end
   
