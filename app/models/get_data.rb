@@ -2,7 +2,13 @@ require 'json'
 require 'rest-client'
 require 'awesome_print'
 
-#class GetData
+class GetData
+
+  attr_reader :url
+
+  def initialize
+    @url = url
+  end
 
   
 
@@ -16,7 +22,7 @@ require 'awesome_print'
    
           "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=#{letter}"
        end
-   end
+    end
     # response = RestClient.get(https://www.thecocktaildb.com/api.php)
     # data_hash = JSON.parse(response)
 
@@ -50,12 +56,12 @@ require 'awesome_print'
 
         if array_of_values and array_of_values.each do |individual_drink_info_hash|
            new_array << individual_drink_info_hash
+          end
         end
-       end
+      end
     end
+    new_array
   end
-  new_array
-end
 
 ap simplify_the_cocktail_data_structure
 

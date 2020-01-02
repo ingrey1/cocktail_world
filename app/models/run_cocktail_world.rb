@@ -2,7 +2,7 @@ require 'pry'
 class RunCocktailWorld
 
 def initialize
-
+#call run()
 end
 
   def greeting
@@ -23,18 +23,57 @@ end
       user_input = gets.strip
 
       if user_input == "1"
+        puts "Enter the name of a cocktail"
         # get_user_input function
+        user_cocktail = gets.strip
         # retrieve_cocktail_info function
-        # display_cocktail function
-        # continue
-        
-      end
+        cocktail = retrieve_cocktail_by_name(user_cocktail)
+        puts cocktail
+        # display_cocktail function(after testing)
+        puts 
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts
+        puts "Enter 1 to return to main menu"
+        puts "Enter exit to quit"
+        user_choice1 = gets.strip
+          if user_choice1 == "1"
+            continue
+          else 
+            break
+          end
+        elsif user_input == "2"
+          puts "Enter the name of an Ingredient"
+          user_ingredient = gets.strip
+          cocktails_by_ingredient = retrieve_cocktails_by_ingredient(user_ingredient)
+          puts cocktails_by_ingredient
+          puts
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts
+          puts "Enter 1 to return to the main menu"
+          puts "Enter exit to quit"
+          user_choice2 = gets.strip
+            if user_choice2 == "1"
+              continue
+            else
+              break
+            end
+          elsif user_input = "3"
+            random_cocktail = select_random_cocktail()
+            puts random_cocktail
+            puts 
+            puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            puts 
+            puts "Enter 1 to return to the main menu"
+            puts "Enter exit to quit"
+            user_choice3 = gets.strip
+              if user_choice3 == "1"
+                continue
+              else 
+                break
+              end
+            else 
+              break      
     end
-    # display menu
-    # get user input, save to variable
-    # if user said 1, call method 1
-    # elsif user said 2.....
-    #elsif exit, break
   end
 
   def retrieve_cocktail_by_name(name)
@@ -99,18 +138,9 @@ end
     end
   end
 
-  # def all_ingredients
-  #   array = []
-  #     Ingredient.all.map do |ingredient|
-  #       array << ingredient.name 
-  #     end
-  #   array.uniq
-  # end
-
   def select_random_cocktail
    random_cocktail = Cocktail.all.sample
    #sample a random cocktail
-   #take out the name
    retrieve_cocktail_by_name(random_cocktail.name)
    # call retrieve_cocktail_by_name
   end
