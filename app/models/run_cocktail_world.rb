@@ -27,8 +27,8 @@ class RunCocktailWorld
         user_cocktail = gets.strip
         # retrieve_cocktail_info function
         cocktail = retrieve_cocktail_by_name(user_cocktail)
-        display_cocktail(cocktail)
-        # puts cocktail
+        # display_cocktail(cocktail)
+        puts cocktail
         # display_cocktail function(after testing)
         puts
         puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
