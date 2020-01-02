@@ -19,23 +19,19 @@ class RunCocktailWorld
   def run
     while true
       greeting()
-      user_input = gets.strip
+      user_input = gets.strip.downcase
 
       if user_input == "1"
         puts "Enter the name of a cocktail"
         # get_user_input function
-        user_cocktail = gets.strip
+        user_cocktail = gets.strip.downcase
         # retrieve_cocktail_info function
         cocktail = retrieve_cocktail_by_name(user_cocktail)
-        # display_cocktail(cocktail)
-        puts cocktail
-        # display_cocktail function(after testing)
-        puts
-        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        display_cocktail(cocktail)
         puts
         puts "Enter 1 to return to main menu"
         puts "Enter exit to quit"
-        user_choice1 = gets.strip
+        user_choice1 = gets.strip.downcase
         if user_choice1 == "1"
           next
         else
@@ -43,31 +39,37 @@ class RunCocktailWorld
         end
       elsif user_input == "2"
         puts "Enter the name of an Ingredient"
-        user_ingredient = gets.strip
+        user_ingredient = gets.strip.downcase
         cocktails_by_ingredient = retrieve_cocktails_by_ingredient(user_ingredient)
-        puts cocktails_by_ingredient
+        puts
+        puts "The cocktails with #{user_ingredient} are :"
+        puts
+        cocktail_names = []
+        cocktails_by_ingredient.each do |cocktail|
+          cocktail_names.push(cocktail[0][:name])
+          # outputs cocktail_names
+        end
+        puts cocktail_names
         puts
         puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         puts
         puts "Enter 1 to return to the main menu"
         puts "Enter exit to quit"
-        user_choice2 = gets.strip
+        user_choice2 = gets.strip.downcase
         if user_choice2 == "1"
-          continue
+          next
         else
           break
         end
       elsif user_input == "3"
         random_cocktail = select_random_cocktail()
-        puts random_cocktail
-        puts
-        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        display_cocktail(random_cocktail)
         puts
         puts "Enter 1 to return to the main menu"
         puts "Enter exit to quit"
-        user_choice3 = gets.strip
+        user_choice3 = gets.strip.downcase
         if user_choice3 == "1"
-          continue
+          next
         else
           break
         end
@@ -99,15 +101,10 @@ class RunCocktailWorld
 
   def retrieve_cocktails_by_ingredient(name)
     # search Ingredients by ingredient name
+    cocktail_array = []
 
     find_ingredient = Ingredient.find_by(name: name)
     cocktail_ingredients_by_ingredient = CocktailIngredient.where(ingredient: find_ingredient)
-
-
-    # find_ingredient = Ingredient.all.find { |ingredient| ingredient.name == name }
-    # cocktail_ingredients_by_ingredient = CocktailIngredient.all.select do |cocktail_ingredient|
-    #   cocktail_ingredient.ingredient == find_ingredient
-    # end
 
     ingredient_cocktails = CocktailIngredient.all.select do |cocktail_ingredient|
       cocktail_ingredient.ingredient == find_ingredient
@@ -118,10 +115,13 @@ class RunCocktailWorld
     end
 
     cocktails_with_ingredient.map do |cocktail|
-      retrieve_cocktail_by_name(cocktail.name)
+      array_of_cocktails = []
+      x = retrieve_cocktail_by_name(cocktail.name)
+      array_of_cocktails.push(x)
+      array_of_cocktails
     end
   end
-
+  
   def make_cocktail(name, instruction, ingredients_arr, amounts_arr)
     # binding.pry
     new_cocktail = { name: name, instructions: instruction, ingredients: {} }
@@ -133,19 +133,30 @@ class RunCocktailWorld
   end
 
   def display_cocktail(cocktail)
-    cocktail.each do |cocktail|
+    
       puts "You have asked for : "
+      puts 
       puts "~" * 20
-
-      puts cocktail[:name]
+      
+      puts "cocktail name: #{cocktail[:name]}" 
       puts
-      puts cocktail[:ingredients]
+      puts "instructions for making: #{cocktail[:instructions]}"
       puts
-      puts cocktail[:instructions]
+      puts "ingredients: "
+      cocktail[:ingredients].each do |name, amount|
+        puts "\t#{name}: #{amount} "   
+      end 
 
       puts "~" * 20
     end
-  end
+  
+    # def display_cocktail_names(user_ingredient)
+        #cocktail_array = []
+    #   puts "The cocktails that contain #{user_ingredient}"
+    #   cocktails_by_ingredient.each do | cocktail |
+    #   cocktail_array << 
+    # end
+    # end
 
   def select_random_cocktail
     random_cocktail = Cocktail.all.sample
