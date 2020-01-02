@@ -12,13 +12,14 @@ class RunCocktailWorld
     puts "Press 3 for a surprise cocktail"
     puts "Press 4 for cocktail stats"
     puts "Enter exit to quit"
-  end
+  end # simple greeting menu
 
   def run
     while true
       greeting()
       user_input = gets.strip.downcase
 
+      #menu case 1; search by cocktail name
       if user_input == "1"
         puts "Enter the name of a cocktail"
         # get_user_input function
@@ -27,13 +28,12 @@ class RunCocktailWorld
         cocktail = retrieve_cocktail_by_name(user_cocktail)
         if !cocktail
           put_tilda_25_times
-          3.times {puts "\nWe don't have that cocktail!\n"}
+          3.times {puts "We don't have that cocktail!"}
           put_tilda_25_times
           next
         end
         display_cocktail(cocktail)
-        puts "\nEnter 1 to return to main menu"
-        puts "Enter exit to quit"
+        display_return_menu 
         user_choice1 = gets.strip.downcase
         if user_choice1 == "1"
           next
@@ -44,6 +44,8 @@ class RunCocktailWorld
           9.times {puts "#{user_choice1} is an Invalid command!"}
           next
         end
+
+        #menu case 2; search for cocktails with certain ingredient
       elsif user_input == "2"
         puts "Enter the name of an Ingredient"
         user_ingredient = gets.strip.downcase
@@ -63,9 +65,7 @@ class RunCocktailWorld
         puts cocktail_names
         puts 
         put_tilda_25_times
-        puts
-        puts "Enter 1 to return to the main menu"
-        puts "Enter exit to quit"
+        display_return_menu
         
         user_choice2 = gets.strip.downcase
         if user_choice2 == "1"
@@ -77,12 +77,12 @@ class RunCocktailWorld
           9.times {puts "#{user_choice2} is an Invalid command!"}
           next
         end
+
+        #menu case 3; search for a random cocktail
       elsif user_input == "3"
         random_cocktail = select_random_cocktail()
         display_cocktail(random_cocktail)
-        puts
-        puts "Enter 1 to return to the main menu"
-        puts "Enter exit to quit"
+        display_return_menu
         user_choice3 = gets.strip.downcase
         if user_choice3 == "1"
           next
@@ -93,12 +93,13 @@ class RunCocktailWorld
           9.times {puts "#{user_choice3} is an Invalid command!"}
           next
         end
+
+        #menu case 4; output some cocktail stats
       elsif user_input == '4'
         puts "There are #{Cocktail.all.count} cocktails and #{Ingredient.all.count} ingredients."
         puts "Here are the most used cocktail ingredients:\n\n"
         Ingredient.display_popular(10)
         sleep 2
-        
       elsif user_input == "exit"
         break
       else
@@ -111,19 +112,19 @@ class RunCocktailWorld
   end
 
   def retrieve_cocktail_by_name(name)
-    cocktail = Cocktail.find_by(name: name)
+    cocktail = Cocktail.find_by(name: name) #find cocktail by name
     if !cocktail
       return nil
     end
 
-    cocktail_ingredients = CocktailIngredient.where(cocktail: cocktail)
+    cocktail_ingredients = CocktailIngredient.where(cocktail: cocktail)# find CocktailIngredients by cocktail
 
     ingredient_names = cocktail_ingredients.map do |cocktail_ingredient|
-      cocktail_ingredient.ingredient.name
+      cocktail_ingredient.ingredient.name # get ingredient names for making a cocktail
     end
 
     ingredient_amounts = cocktail_ingredients.map do |cocktail_ingredients|
-      cocktail_ingredients.amount
+      cocktail_ingredients.amount #get ingredient amounts for make cocktail
     end
 
     made_cocktail = make_cocktail(cocktail.name, cocktail.instructions, ingredient_names, ingredient_amounts)
@@ -135,27 +136,23 @@ class RunCocktailWorld
     # search Ingredients by ingredient name
     cocktail_array = []
 
-    find_ingredient = Ingredient.find_by(name: name)
+    find_ingredient = Ingredient.find_by(name: name) # find CocktailIngredient that match ingredient
     cocktail_ingredients_by_ingredient = CocktailIngredient.where(ingredient: find_ingredient)
 
-    ingredient_cocktails = CocktailIngredient.all.select do |cocktail_ingredient|
-      cocktail_ingredient.ingredient == find_ingredient
-    end
-
-    cocktails_with_ingredient = ingredient_cocktails.map do |cocktails_ingredients|
-      cocktails_ingredients.cocktail
+    cocktails_with_ingredient = cocktail_ingredients_by_ingredient.map do |cocktails_ingredients|
+    cocktails_ingredients.cocktail # get the Cocktail instances with ingredients from CocktailIngredients
     end
 
     cocktails_with_ingredient.map do |cocktail|
       array_of_cocktails = []
       x = retrieve_cocktail_by_name(cocktail.name)
       array_of_cocktails.push(x)
-      array_of_cocktails
+      array_of_cocktails # show the names of the cocktails with wanted ingredient
     end
   end
   
   def make_cocktail(name, instruction, ingredients_arr, amounts_arr)
-    # binding.pry
+    # create an instance of a cocktail in the form we want
     new_cocktail = { name: name, instructions: instruction, ingredients: {} }
     new_cocktail_ingredients = new_cocktail[:ingredients]
     ingredients_arr.each_with_index do |key, index|
@@ -186,5 +183,10 @@ class RunCocktailWorld
 
   def put_tilda_25_times
     puts "~" * 25
+  end
+
+  def display_return_menu
+        puts "\nEnter 1 to return to main menu"
+        puts "Enter exit to quit"
   end
 end
