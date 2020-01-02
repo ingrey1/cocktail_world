@@ -17,6 +17,10 @@ class Cocktail < ActiveRecord::Base
     ingredients.map { |ingredient| ingredient.name }
   end
 
+  def self.cocktail_by_name(cocktail_name)
+    self.cocktails_by_name(cocktail_name).first
+  end
+
   def self.cocktails_by_name(cocktail_name)
     Cocktail.where("name like ?", "%#{cocktail_name}%")
   end
