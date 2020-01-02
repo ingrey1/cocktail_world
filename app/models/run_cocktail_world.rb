@@ -9,7 +9,7 @@ end
   puts
 	puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 	puts "} Welcome to Cocktail World! {"
-	puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+	puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" #MAYBE CHANGE THIS TO MAKE A BIT SIMPLER - IE user_input only once
   puts "Press 1 to search for a cocktail by name"
   puts "Press 2 to search for a cocktail by ingredient"
   puts "Press 3 for a surprise cocktail"
@@ -109,6 +109,10 @@ end
 
   def select_random_cocktail
    random_cocktail = Cocktail.all.sample
+   #sample a random cocktail
+   #take out the name
+   retrieve_cocktail_by_name(random_cocktail.name)
+   # call retrieve_cocktail_by_name
   end
 end
 
