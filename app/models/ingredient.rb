@@ -5,9 +5,9 @@ class Ingredient < ActiveRecord::Base
     CocktailIngredient.where(ingredient: self)
   end
 
-  def cocktails 
-     cocktail_ingredients.map {|ci| ci.cocktail}
-  end 
+  def cocktails
+    cocktail_ingredients.map { |ci| ci.cocktail }
+  end
 
   def cocktail_count
     cocktails.count
@@ -18,8 +18,13 @@ class Ingredient < ActiveRecord::Base
   end
 
   def percent_cocktail_use
-    
-  end 
+    (cocktail_count * 1.0 / Cocktail.all.count * 100).round(2)
+  end
 
-  
+  def display_percent_cocktail_use
+    puts "#{self.name}: #{percent_cocktail_use}\%"
+  end 
+ 
+    
+
 end
