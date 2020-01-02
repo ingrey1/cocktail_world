@@ -81,9 +81,6 @@ class RunCocktailWorld
     if !cocktail
       return nil
     end
-    # cocktail_ingredients = CocktailIngredient.all.select do |cocktail_ingredient|
-    #   cocktail_ingredient.cocktail == cocktail
-    # end
 
     cocktail_ingredients = CocktailIngredient.where(cocktail: cocktail)
 
@@ -102,10 +99,14 @@ class RunCocktailWorld
   def retrieve_cocktails_by_ingredient(name)
     # search Ingredients by ingredient name
 
-    find_ingredient = Ingredient.all.find { |ingredient| ingredient.name == name }
-    cocktail_ingredients_by_ingredient = CocktailIngredient.all.select do |cocktail_ingredient|
-      cocktail_ingredient.ingredient == find_ingredient
-    end
+    find_ingredient = Ingredient.find_by(name: name)
+    cocktail_ingredients_by_ingredient = CocktailIngredient.where(ingredient: find_ingredient)
+
+
+    # find_ingredient = Ingredient.all.find { |ingredient| ingredient.name == name }
+    # cocktail_ingredients_by_ingredient = CocktailIngredient.all.select do |cocktail_ingredient|
+    #   cocktail_ingredient.ingredient == find_ingredient
+    # end
 
     ingredient_cocktails = CocktailIngredient.all.select do |cocktail_ingredient|
       cocktail_ingredient.ingredient == find_ingredient
