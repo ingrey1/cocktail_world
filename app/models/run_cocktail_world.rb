@@ -27,6 +27,16 @@ class RunCocktailWorld
         user_cocktail = gets.strip.downcase
         # retrieve_cocktail_info function
         cocktail = retrieve_cocktail_by_name(user_cocktail)
+        if !cocktail
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          puts
+          puts "We don't have that cocktail!"
+          puts "We don't have that cocktail!"
+          puts "We don't have that cocktail!"
+          puts
+          puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+          next
+        end
         display_cocktail(cocktail)
         puts
         puts "Enter 1 to return to main menu"
@@ -49,6 +59,10 @@ class RunCocktailWorld
           cocktail_names.push(cocktail[0][:name])
           # outputs cocktail_names
         end
+        if cocktail_names.length < 1 
+          puts 'we dont have the ingredient in any drinks, sorry!'
+        end
+      
         puts cocktail_names
         puts
         puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -73,8 +87,21 @@ class RunCocktailWorld
         else
           break
         end
-      else
+      elsif user_input == "exit"
         break
+      else
+       puts
+       puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+       puts "#{user_input} is an Invalid command!"
+       puts "#{user_input} is an Invalid command!"
+       puts "#{user_input} is an Invalid command!"
+       puts "#{user_input} is an Invalid command!"
+       puts "#{user_input} is an Invalid command!"
+       puts "#{user_input} is an Invalid command!"
+       puts "#{user_input} is an Invalid command!"
+       puts "#{user_input} is an Invalid command!"
+       puts "#{user_input} is an Invalid command!"
+        next
       end
     end
   end
@@ -143,10 +170,10 @@ class RunCocktailWorld
       puts "instructions for making: #{cocktail[:instructions]}"
       puts
       puts "ingredients: "
+     
       cocktail[:ingredients].each do |name, amount|
         puts "\t#{name}: #{amount} "   
-      end 
-
+      end
       puts "~" * 20
     end
   
