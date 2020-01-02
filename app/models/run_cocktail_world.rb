@@ -27,7 +27,8 @@ class RunCocktailWorld
         user_cocktail = gets.strip
         # retrieve_cocktail_info function
         cocktail = retrieve_cocktail_by_name(user_cocktail)
-        puts cocktail
+        display_cocktail(cocktail)
+        # puts cocktail
         # display_cocktail function(after testing)
         puts
         puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -52,7 +53,7 @@ class RunCocktailWorld
         puts "Enter exit to quit"
         user_choice2 = gets.strip
         if user_choice2 == "1"
-          next
+          continue
         else
           break
         end
@@ -66,7 +67,7 @@ class RunCocktailWorld
         puts "Enter exit to quit"
         user_choice3 = gets.strip
         if user_choice3 == "1"
-          next
+          continue
         else
           break
         end
@@ -137,6 +138,7 @@ class RunCocktailWorld
       puts "~" * 20
 
       puts cocktail[:name]
+      puts
       puts cocktail[:ingredients]
       puts
       puts cocktail[:instructions]
