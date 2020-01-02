@@ -1,5 +1,9 @@
 require "pry"
 
+
+
+
+
 class RunCocktailWorld
   def initialize
     #call run()
@@ -69,6 +73,7 @@ class RunCocktailWorld
         puts
         puts "Enter 1 to return to the main menu"
         puts "Enter exit to quit"
+        
         user_choice2 = gets.strip.downcase
         if user_choice2 == "1"
           next
@@ -90,9 +95,9 @@ class RunCocktailWorld
       elsif user_input == "exit"
         break
       else
-       puts
+     
        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-       puts "#{user_input} is an Invalid command!"
+       puts "#{user_input}  is an Invalid command!"
        puts "#{user_input} is an Invalid command!"
        puts "#{user_input} is an Invalid command!"
        puts "#{user_input} is an Invalid command!"

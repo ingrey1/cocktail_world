@@ -34,5 +34,9 @@ class Ingredient < ActiveRecord::Base
   def self.display_popular(limit)
     self.most_popular.first(limit).each {|ingredient| ingredient.display_percent_cocktail_use } 
   end 
+
+  def self.ingredients_by_name(ingredient_name)
+    Cocktail.where("name like ?", "%#{ingredient_name}%")
+  end
  
 end
