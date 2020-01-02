@@ -8,3 +8,5 @@ require_relative "../config/environment.rb"
 runner = RunCocktailWorld.new
 result = runner.retrieve_cocktail_by_name("A1")
 puts result
+
+binding.pry
