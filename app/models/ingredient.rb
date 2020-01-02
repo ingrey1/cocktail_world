@@ -36,7 +36,7 @@ class Ingredient < ActiveRecord::Base
   end 
 
   def self.ingredients_by_name(ingredient_name)
-    Cocktail.where("name like ?", "%#{ingredient_name}%")
+    Ingredient.where("name like ?", "%#{ingredient_name}%")
   end
  
 end
