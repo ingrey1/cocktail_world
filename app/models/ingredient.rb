@@ -6,11 +6,12 @@ class Ingredient < ActiveRecord::Base
   end
 
   def cocktail_count
-     cocktails.count
-  end 
+    cocktails.count
+  end
 
   def cocktail_names
-    cocktails.map {|cocktail| cocktail.name}
-  end 
+    cocktails.map { |cocktail| cocktail.name }
+  end
 
+  
 end
