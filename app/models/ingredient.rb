@@ -17,5 +17,9 @@ class Ingredient < ActiveRecord::Base
     cocktails.map { |cocktail| cocktail.name }
   end
 
+  def percent_cocktail_use
+    
+  end 
+
   
 end
