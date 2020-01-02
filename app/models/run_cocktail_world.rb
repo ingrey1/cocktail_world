@@ -71,7 +71,7 @@ end
               else 
                 break
               end
-            else 
+       else 
               break      
     end
   end
@@ -79,23 +79,30 @@ end
 
   def retrieve_cocktail_by_name(name)
     cocktail = Cocktail.all.find { |cocktail| cocktail.name == name }
-    if !cocktail
+    if !cocktail #find our cocktail
       return nil
     end
+    # binding.pry
      cocktail_ingredients = CocktailIngredient.all.select do |cocktail_ingredient|
         cocktail_ingredient.cocktail == cocktail
+        #find all CocktailIngredients associated with cocktail
      end
      
+     
      ingredient_names = cocktail_ingredients.map do |cocktail_ingredient|
-      cocktail_ingredient.ingredient.name
+      cocktail_ingredient.ingredient.name #make array of names of ingredients for cocktail
      end
     
+    
      ingredient_amounts = cocktail_ingredients.map do |cocktail_ingredients|
-      cocktail_ingredients.amount
+      cocktail_ingredients.amount # make array of ingredient amounts for cocktail
      end
+    
+    
    
   made_cocktail = make_cocktail(cocktail.name, cocktail.instructions, ingredient_names, ingredient_amounts)
-  made_cocktail
+  made_cocktail #create the cocktail object in a form that we want
+  
   end
 
   def retrieve_cocktails_by_ingredient(name)
