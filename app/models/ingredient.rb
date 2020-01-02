@@ -1,9 +1,13 @@
 class Ingredient < ActiveRecord::Base
   has_many :ingredients, through: :cocktail_ingredients
 
-  def cocktails
+  def cocktail_ingredients
     CocktailIngredient.where(ingredient: self)
   end
+
+  def cocktails 
+     cocktail_ingredients.map {|ci| ci.cocktail}
+  end 
 
   def cocktail_count
     cocktails.count
