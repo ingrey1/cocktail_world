@@ -24,7 +24,15 @@ class Ingredient < ActiveRecord::Base
   def display_percent_cocktail_use
     puts "#{self.name}: #{percent_cocktail_use}\%"
   end 
- 
-    
 
+  def self.most_popular
+
+    self.all.sort_by {|ingredient| -ingredient.percent_cocktail_use}
+    
+  end
+  
+  def self.display_popular(limit)
+    self.most_popular.first(limit).each {|ingredient| ingredient.display_percent_cocktail_use } 
+  end 
+ 
 end
