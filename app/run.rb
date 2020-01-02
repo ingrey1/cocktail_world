@@ -6,5 +6,5 @@ require_relative "../config/environment.rb"
 #popDB = PopulateDB.new(all_cocktails)
 #popDB.populate_db
 runner = RunCocktailWorld.new
-result = runner.retrieve_cocktails_by_ingredient("Vodka")
+result = runner.retrieve_cocktail_by_name("A1")
 puts result
