@@ -2,7 +2,7 @@ class Ingredient < ActiveRecord::Base
   has_many :ingredients, through: :cocktail_ingredients
 
   def cocktails
-    CocktailIngredient.all.select { |ci| ci.ingredient == self }.map { |ci| ci.cocktail }
+    CocktailIngredient.where(ingredient: self)
   end
 
   def cocktail_count
