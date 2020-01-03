@@ -12,6 +12,12 @@ Option 4:  View some basic statistical information for cocktails.
 Option 5: Exit the application
 
 
+
+## Link to YouTube Tour of the App
+
+[See the app in action here](https://youtu.be/ahhTE4a_xvg)
+
+
 ## Installation Instructions
 
 This application allows the user to search a database of cocktails, based on name or ingredients. 
