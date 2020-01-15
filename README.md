@@ -11,6 +11,8 @@ Option 4:  View some basic statistical information for cocktails.
 
 Option 5: Exit the application
 
+voila!
+
 
 
 ## Link to YouTube Tour of the App
