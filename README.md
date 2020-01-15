@@ -28,7 +28,8 @@ In order to use the “Cocktail World” app, do the following:
 
 1. Clone the app from this github repository
 2. In the Command Line, navigate to the folder on your machine where you downloaded the app
-3. Run bundle install.
+3. Run 'bundle install'.
+4. Run 'rake db:migrate'.
 4. Navigate to the config/environment file and comment out ActiveRecord::Base.logger.level = 1
    This line of code is there so that the user does not see user queries any time they make a command. However, when one runs the file, it will automatically populate a database for usage. This way the app can be used offline and multiple get requests do not have to be used. 
 5. Navigate to the app folder in cocktail_world and type on the command line: ruby run.rb
